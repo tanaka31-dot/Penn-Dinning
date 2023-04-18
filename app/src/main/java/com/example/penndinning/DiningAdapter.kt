@@ -2,8 +2,11 @@ package com.example.penndinning
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Outline
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.ViewOutlineProvider
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -44,6 +47,7 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
                 val formattedDateTime = formatter.format(currentDateTime)
                 with(today) {
                     val daypartsSize = this?.dayparts?.size
+                    var isOpen = false;
                     for (i in 0 until daypartsSize!!) {
                         val part = this?.dayparts?.get(i)
                         with(part) {
@@ -61,13 +65,21 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
                                 marginEnd = 16
                             }
 
-                            textBox.setBackgroundColor(Color.GRAY)
+                            textBox.setBackgroundColor(Color.parseColor("#d9d9d9"))
+                            textBox.setPadding(16, 10, 16, 10)
+
+                            textBox.outlineProvider = object : ViewOutlineProvider() {
+                                override fun getOutline(view: View, outline: Outline) {
+                                    outline.setRoundRect(0, 0, view.width, view.height, 16f)
+                                }
+                            }
+                            textBox.clipToOutline = true
                             binding.textBoxContainer.addView(textBox)
                             // Get dates
                             val start = formatter.parse(this?.starttime)
                             val end = formatter.parse(this?.endtime)
                             val checkTime = formatter.parse(formattedDateTime)
-                            var isOpen = false;
+
 
                             // Compare dates with current time
                             if (checkTime.time > start.time && checkTime.time < end.time) {
@@ -75,12 +87,13 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
                                 binding.statusRv.setTextColor(Color.parseColor("#3dcc61"))
                                 isOpen = true
                             }
-                            if (!isOpen) {
-                                binding.statusRv.text = "Closed"
-                                binding.statusRv.setTextColor(Color.GRAY)
-                            }
+
                         }
                         }
+                    if (!isOpen) {
+                        binding.statusRv.text = "Closed"
+                        binding.statusRv.setTextColor(Color.GRAY)
+                    }
                 }
             }
         }
