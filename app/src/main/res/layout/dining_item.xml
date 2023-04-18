@@ -33,21 +33,14 @@
         app:layout_constraintTop_toBottomOf="@id/status_rv"
         android:layout_marginLeft="5dp"/>
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/text_box_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toEndOf="@id/dining_image_rv"
         app:layout_constraintTop_toBottomOf="@id/dining_name_rv"
-        android:layout_marginLeft="5dp">
-
-        <LinearLayout
-            android:id="@+id/text_box_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-
-    </ScrollView>
-
+        android:layout_marginLeft="5dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
