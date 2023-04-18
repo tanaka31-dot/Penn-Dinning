@@ -44,7 +44,9 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
                 val today = days?.get(0)
                 val currentDateTime = Calendar.getInstance().time
                 val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                val formatter2 = SimpleDateFormat("HH:mm")
                 val formattedDateTime = formatter.format(currentDateTime)
+                val formattedTime = formatter2.format(currentDateTime)
                 with(today) {
                     val daypartsSize = this?.dayparts?.size
                     var isOpen = false;
@@ -65,6 +67,21 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
                                 marginEnd = 16
                             }
 
+                            val startTime = formatter2.parse(textBoxStart)
+                            val endTime = formatter2.parse(textBoxEnd)
+                            val currTime = formatter2.parse(formattedTime)
+
+                            if (currTime.after(startTime) && currTime.before(endTime)) {
+                                textBox.setBackgroundColor(Color.parseColor("#7cc497"))
+                                textBox.setPadding(16, 10, 16, 10)
+                                textBox.setTextColor(Color.WHITE)
+                                textBox.outlineProvider = object : ViewOutlineProvider() {
+                                    override fun getOutline(view: View, outline: Outline) {
+                                        outline.setRoundRect(0, 0, view.width, view.height, 16f)
+                                    }
+                                }
+                                textBox.clipToOutline = true
+                            } else {
                             textBox.setBackgroundColor(Color.parseColor("#d9d9d9"))
                             textBox.setPadding(16, 10, 16, 10)
 
@@ -74,6 +91,8 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
                                 }
                             }
                             textBox.clipToOutline = true
+                            }
+
                             binding.textBoxContainer.addView(textBox)
                             // Get dates
                             val start = formatter.parse(this?.starttime)
