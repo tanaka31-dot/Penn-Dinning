@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +35,7 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
 
         with(holder) {
             with(dinings[position]) {
+                println("ID: $id")
                 binding.textBoxContainer.removeAllViews()
                 binding.diningNameRv.text = name
                 Picasso.get().load(image).resize(250, 200)
@@ -118,25 +118,6 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
         }
 
     }
-
-//    private fun mapHours(hour: String): String {
-//        println(hour)
-//        when(hour) {
-//            "13" -> return "1"
-//            "14" -> return "2"
-//            "15" -> return "3"
-//            "16" -> return "4"
-//            "17" -> return "5"
-//            "18" -> return "6"
-//            "19" -> return "7"
-//            "20" -> return "8"
-//            "21" -> return "9"
-//            "22" -> return "10"
-//            "23" -> return "11"
-//            "24" -> return "12"
-//        }
-//        return hour
-//    }
 
     inner class DiningViewHolder(val binding: DiningItemBinding) :
         RecyclerView.ViewHolder(binding.root)
