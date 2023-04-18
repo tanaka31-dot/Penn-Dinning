@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeSreenFragment">
+    <fragment
+        android:id="@+id/homeSreenFragment"
+        android:name="com.example.penndinning.HomeSreenFragment"
+        android:label="fragment_home_sreen"
+        tools:layout="@layout/fragment_home_sreen" >
+        <action
+            android:id="@+id/action_homeSreenFragment_to_diningDetailsFragment"
+            app:destination="@id/diningDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/diningDetailsFragment"
+        android:name="com.example.penndinning.DiningDetailsFragment"
+        android:label="fragment_dining_details"
+        tools:layout="@layout/fragment_dining_details" >
+        <action
+            android:id="@+id/action_diningDetailsFragment_to_hoursFragment2"
+            app:destination="@id/hoursFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/hoursFragment2"
+        android:name="com.example.penndinning.HoursFragment"
+        android:label="fragment_hours"
+        tools:layout="@layout/fragment_hours" />
+</navigation>
