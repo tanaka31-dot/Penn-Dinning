@@ -8,7 +8,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DiningViewModel: ViewModel()  {
+class DiningViewModel : ViewModel() {
 
     private val _response = MutableLiveData<MutableList<Dining>>()
     val response: LiveData<MutableList<Dining>> get() = _response
@@ -21,10 +21,13 @@ class DiningViewModel: ViewModel()  {
     //var dinings = mutableListOf<Dining>()
 
     private fun getDinings() {
-        DiningApi.retrofitService.getDinings().enqueue(object:
+        DiningApi.retrofitService.getDinings().enqueue(object :
             Callback<MutableList<Dining>> {
             //in the body of the two overridden methods
-            override fun onResponse(call: Call<MutableList<Dining>>, response: Response<MutableList<Dining>>) {
+            override fun onResponse(
+                call: Call<MutableList<Dining>>,
+                response: Response<MutableList<Dining>>
+            ) {
                 _response.value = response.body()
             }
 

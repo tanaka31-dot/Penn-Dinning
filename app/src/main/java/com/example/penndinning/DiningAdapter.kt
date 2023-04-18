@@ -17,8 +17,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class DiningAdapter(private val context: Context, private val dinings: MutableList<Dining>):
-    RecyclerView.Adapter<DiningAdapter.DiningViewHolder>(){
+class DiningAdapter(private val context: Context, private val dinings: MutableList<Dining>) :
+    RecyclerView.Adapter<DiningAdapter.DiningViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiningViewHolder {
         val binding = DiningItemBinding.inflate(
@@ -49,13 +49,13 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
                 val formattedTime = formatter2.format(currentDateTime)
                 with(today) {
                     val daypartsSize = this?.dayparts?.size
-                    var isOpen = false;
+                    var isOpen = false
                     for (i in 0 until daypartsSize!!) {
                         val part = this?.dayparts?.get(i)
                         with(part) {
                             //Populate textboxes with opening times
                             val textBoxStart = this?.starttime?.substring(11, 16)
-                            val textBoxEnd = this?.endtime?.substring(11,16)
+                            val textBoxEnd = this?.endtime?.substring(11, 16)
                             val stringText = "$textBoxStart-$textBoxEnd"
                             val textBox = TextView(context)
                             textBox.text = stringText
@@ -82,15 +82,15 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
                                 }
                                 textBox.clipToOutline = true
                             } else {
-                            textBox.setBackgroundColor(Color.parseColor("#d9d9d9"))
-                            textBox.setPadding(16, 10, 16, 10)
+                                textBox.setBackgroundColor(Color.parseColor("#d9d9d9"))
+                                textBox.setPadding(16, 10, 16, 10)
 
-                            textBox.outlineProvider = object : ViewOutlineProvider() {
-                                override fun getOutline(view: View, outline: Outline) {
-                                    outline.setRoundRect(0, 0, view.width, view.height, 16f)
+                                textBox.outlineProvider = object : ViewOutlineProvider() {
+                                    override fun getOutline(view: View, outline: Outline) {
+                                        outline.setRoundRect(0, 0, view.width, view.height, 16f)
+                                    }
                                 }
-                            }
-                            textBox.clipToOutline = true
+                                textBox.clipToOutline = true
                             }
 
                             binding.textBoxContainer.addView(textBox)
@@ -108,7 +108,7 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
                             }
 
                         }
-                        }
+                    }
                     if (!isOpen) {
                         binding.statusRv.text = "Closed"
                         binding.statusRv.setTextColor(Color.GRAY)
