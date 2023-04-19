@@ -18,7 +18,7 @@ class DiningViewModel : ViewModel() {
         getDinings()
     }
 
-    //var dinings = mutableListOf<Dining>()
+    //var dinings =
 
     private fun getDinings() {
         DiningApi.retrofitService.getDinings().enqueue(object :

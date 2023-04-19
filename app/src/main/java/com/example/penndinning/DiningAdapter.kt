@@ -17,7 +17,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class DiningAdapter(private val context: Context, private val dinings: MutableList<Dining>) :
+class DiningAdapter(private val listener: ItemClickListener, private val context: Context,
+                    private val dinings: MutableList<Dining>) :
     RecyclerView.Adapter<DiningAdapter.DiningViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiningViewHolder {
@@ -32,10 +33,12 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
     override fun getItemCount() = dinings.size
 
     override fun onBindViewHolder(holder: DiningViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(position)
+        }
 
         with(holder) {
             with(dinings[position]) {
-                println("ID: $id")
                 binding.textBoxContainer.removeAllViews()
                 binding.diningNameRv.text = name
                 Picasso.get().load(image).resize(250, 200)
@@ -48,6 +51,7 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
                 val formattedDateTime = formatter.format(currentDateTime)
                 val formattedTime = formatter2.format(currentDateTime)
                 with(today) {
+
                     val daypartsSize = this?.dayparts?.size
                     var isOpen = false
                     for (i in 0 until daypartsSize!!) {
@@ -119,6 +123,14 @@ class DiningAdapter(private val context: Context, private val dinings: MutableLi
 
     }
 
+    fun getDiningsList(): MutableList<Dining> {
+        return dinings
+    }
+
     inner class DiningViewHolder(val binding: DiningItemBinding) :
         RecyclerView.ViewHolder(binding.root)
+    interface ItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
 }

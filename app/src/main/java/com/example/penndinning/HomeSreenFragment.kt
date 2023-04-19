@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.penndinning.databinding.FragmentHomeSreenBinding
 
-class HomeSreenFragment : Fragment() {
+class HomeSreenFragment : Fragment(), DiningAdapter.ItemClickListener {
     private var _binding: FragmentHomeSreenBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: DiningViewModel
     private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: DiningAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,12 +32,20 @@ class HomeSreenFragment : Fragment() {
         viewModel = ViewModelProvider(this)[DiningViewModel::class.java]
         recyclerView = binding.sectionListRv
         viewModel.response.observe(viewLifecycleOwner) {
-            val adapter = context?.let { it1 -> DiningAdapter(it1, it) }
+            adapter = context?.let { it1 -> DiningAdapter(this, it1, it) }!!
             recyclerView.adapter = adapter
         }
         val itemDecoration: RecyclerView.ItemDecoration =
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(itemDecoration)
+
+
+    }
+
+    override fun onItemClick(position: Int) {
+        // Call your API here
+        val dinings = adapter.getDiningsList()
+        println(dinings[position].id)
     }
 
 

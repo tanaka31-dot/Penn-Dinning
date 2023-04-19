@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class Dining(
     @Json(name = "id")
-    val id: Int,
+    val id: Int = 0,
     @Json(name = "image")
     val image: String = "",
     @Json(name = "address")
