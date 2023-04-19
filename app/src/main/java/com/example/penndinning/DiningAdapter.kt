@@ -123,10 +123,6 @@ class DiningAdapter(private val listener: ItemClickListener, private val context
 
     }
 
-    fun getDiningsList(): MutableList<Dining> {
-        return dinings
-    }
-
     inner class DiningViewHolder(val binding: DiningItemBinding) :
         RecyclerView.ViewHolder(binding.root)
     interface ItemClickListener {

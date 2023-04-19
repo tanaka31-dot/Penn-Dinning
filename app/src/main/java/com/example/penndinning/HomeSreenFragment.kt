@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.penndinning.databinding.FragmentHomeSreenBinding
@@ -38,14 +40,15 @@ class HomeSreenFragment : Fragment(), DiningAdapter.ItemClickListener {
         val itemDecoration: RecyclerView.ItemDecoration =
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(itemDecoration)
-
-
     }
 
     override fun onItemClick(position: Int) {
         // Call your API here
-        val dinings = adapter.getDiningsList()
-        println(dinings[position].id)
+        val bundle = bundleOf("id" to position)
+        view?.findNavController()?.navigate(
+            R.id.action_homeSreenFragment_to_diningDetailsFragment, bundle)
+//        val din = viewModel.getDiningsList()
+//        println(din?.get(position)?.name)
     }
 
 

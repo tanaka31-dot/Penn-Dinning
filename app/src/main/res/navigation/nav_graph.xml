@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_diningDetailsFragment_to_hoursFragment2"
             app:destination="@id/hoursFragment2" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/hoursFragment2"
