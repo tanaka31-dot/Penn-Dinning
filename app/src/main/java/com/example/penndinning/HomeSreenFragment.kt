@@ -1,11 +1,14 @@
 package com.example.penndinning
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -26,16 +29,29 @@ class HomeSreenFragment : Fragment(), DiningAdapter.ItemClickListener {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentHomeSreenBinding.inflate(inflater, container, false)
+        // Get a reference to the ActionBar
+        val animationView = binding.animationView
+        animationView.playAnimation()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val animationView = binding.animationView
+
         viewModel = ViewModelProvider(this)[DiningViewModel::class.java]
         recyclerView = binding.sectionListRv
         viewModel.response.observe(viewLifecycleOwner) {
             adapter = context?.let { it1 -> DiningAdapter(this, it1, it) }!!
             recyclerView.adapter = adapter
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                animationView.visibility = View.VISIBLE
+                animationView.playAnimation()
+            } else {
+                animationView.visibility = View.GONE
+            }
         }
         val itemDecoration: RecyclerView.ItemDecoration =
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
@@ -47,8 +63,6 @@ class HomeSreenFragment : Fragment(), DiningAdapter.ItemClickListener {
         val bundle = bundleOf("id" to position)
         view?.findNavController()?.navigate(
             R.id.action_homeSreenFragment_to_diningDetailsFragment, bundle)
-//        val din = viewModel.getDiningsList()
-//        println(din?.get(position)?.name)
     }
 
 
