@@ -1,6 +1,7 @@
 package com.example.penndinning
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,7 +37,8 @@ class DiningDetailsFragment : Fragment() {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if(!isLoading) {
                 val dining = viewModel.getDiningsList()?.get(position)
-                Picasso.get().load(dining?.image).into(binding.diningImageBig)
+                Picasso.get().load(dining?.image).fit()
+                    .into(binding.diningImageBig)
                 binding.diningNameDetails.text = dining?.name
                 val dys = dining?.days
                 println(dys?.size)
