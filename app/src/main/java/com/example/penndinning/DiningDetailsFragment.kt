@@ -1,6 +1,8 @@
 package com.example.penndinning
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -8,6 +10,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
@@ -40,6 +45,7 @@ class DiningDetailsFragment : Fragment() {
         viewModel.response.observe(viewLifecycleOwner) {
 
         }
+
         val animationView = binding.animationView
 
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
@@ -96,6 +102,14 @@ class DiningDetailsFragment : Fragment() {
 
                     }
                 }
+            }
+        }
+
+        binding.menuButton.setOnClickListener {
+            val webpage: Uri = Uri.parse("https://university-of-pennsylvania.cafebonappetit.com")
+            val intent = Intent(Intent.ACTION_VIEW, webpage)
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivity(intent)
             }
         }
     }
