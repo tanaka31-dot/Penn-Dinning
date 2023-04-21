@@ -17,8 +17,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class DiningAdapter(private val listener: ItemClickListener, private val context: Context,
-                    private val dinings: MutableList<Dining>) :
+class DiningAdapter(
+    private val listener: ItemClickListener, private val context: Context,
+    private val dinings: MutableList<Dining>
+) :
     RecyclerView.Adapter<DiningAdapter.DiningViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiningViewHolder {
@@ -125,6 +127,7 @@ class DiningAdapter(private val listener: ItemClickListener, private val context
 
     inner class DiningViewHolder(val binding: DiningItemBinding) :
         RecyclerView.ViewHolder(binding.root)
+
     interface ItemClickListener {
         fun onItemClick(position: Int)
     }

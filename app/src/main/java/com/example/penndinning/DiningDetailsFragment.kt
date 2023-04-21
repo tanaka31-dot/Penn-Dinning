@@ -54,7 +54,7 @@ class DiningDetailsFragment : Fragment() {
                 binding.menuButton.visibility = View.GONE
                 animationView.visibility = View.VISIBLE
                 animationView.playAnimation()
-            }else {
+            } else {
                 animationView.visibility = View.GONE
                 binding.hoursButton.visibility = View.VISIBLE
                 binding.menuButton.visibility = View.VISIBLE
@@ -102,16 +102,39 @@ class DiningDetailsFragment : Fragment() {
 
                     }
                 }
-            }
-        }
 
-        binding.menuButton.setOnClickListener {
-            val webpage: Uri = Uri.parse("https://university-of-pennsylvania.cafebonappetit.com")
-            val intent = Intent(Intent.ACTION_VIEW, webpage)
-            if (intent.resolveActivity(requireActivity().packageManager) != null) {
-                startActivity(intent)
+                binding.menuButton.setOnClickListener {
+                    val baseurl = "https://university-of-pennsylvania.cafebonappetit.com"
+                    val diningurl = baseurl + mapDiningToURL(dining?.id)
+                    val webpage: Uri = Uri.parse(diningurl)
+                    val intent = Intent(Intent.ACTION_VIEW, webpage)
+                    if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                        startActivity(intent)
+                    }
+                }
             }
         }
+    }
+
+    fun mapDiningToURL(id: Int?): String {
+        when (id) {
+            593 -> return "/cafe/1920-commons/"
+            636 -> return "/cafe/hill-house/"
+            637 -> return "/cafe/kings-court-english-house/"
+            638 -> return "/cafe/falk-dining-commons/"
+            639 -> return "/cafe/houston-market/"
+            641 -> return "/cafe/accenture-cafe/"
+            642 -> return "/cafe/joes-cafe/"
+            747 -> return "/cafe/mcclelland/"
+            1057 -> return "/cafe/1920-gourmet-grocer/"
+            1163 -> return "/cafe/1920-starbucks/"
+            1442 -> return "/cafe/lauder-college-house/"
+            1732 -> return "/cafe/pret-a-manger-upper/"
+            1733 -> return "/cafe/pret-a-manger-lower/"
+            1464004 -> return "/cafe/quaker-kitchen/"
+            1464009 -> return "/cafe/cafe-west/"
+        }
+        return ""
     }
 
     override fun onDestroyView() {

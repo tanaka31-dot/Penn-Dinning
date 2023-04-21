@@ -26,7 +26,7 @@ interface DiningsApiService {
 }
 
 object DiningApi {
-    val retrofitService : DiningsApiService  by lazy {
-        retrofit.create(DiningsApiService ::class.java)
+    val retrofitService: DiningsApiService by lazy {
+        retrofit.create(DiningsApiService::class.java)
     }
 }

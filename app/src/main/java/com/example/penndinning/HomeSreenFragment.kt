@@ -1,14 +1,10 @@
 package com.example.penndinning
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -62,7 +58,8 @@ class HomeSreenFragment : Fragment(), DiningAdapter.ItemClickListener {
         // Call your API here
         val bundle = bundleOf("id" to position)
         view?.findNavController()?.navigate(
-            R.id.action_homeSreenFragment_to_diningDetailsFragment, bundle)
+            R.id.action_homeSreenFragment_to_diningDetailsFragment, bundle
+        )
     }
 
 
