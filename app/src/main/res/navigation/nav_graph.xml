@@ -29,5 +29,9 @@
         android:id="@+id/hoursFragment2"
         android:name="com.example.penndinning.HoursFragment"
         android:label="fragment_hours"
-        tools:layout="@layout/fragment_hours" />
+        tools:layout="@layout/fragment_hours" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>
