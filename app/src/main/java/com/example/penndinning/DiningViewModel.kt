@@ -21,7 +21,7 @@ class DiningViewModel : ViewModel() {
         getDinings()
     }
 
-    fun getDinings() {
+    private fun getDinings() {
         DiningApi.retrofitService.getDinings().enqueue(object :
             Callback<MutableList<Dining>> {
             //in the body of the two overridden methods

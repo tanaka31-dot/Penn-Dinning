@@ -55,7 +55,6 @@ class HoursFragment : Fragment() {
             } else {
                 animationView.visibility = View.GONE
                 val dining = viewModel.getDiningsList()?.get(position)
-
                 binding.monday.visibility = View.VISIBLE
                 binding.tuesday.visibility = View.VISIBLE
                 binding.wednesday.visibility = View.VISIBLE
@@ -79,11 +78,11 @@ class HoursFragment : Fragment() {
                         val dayOfWeek = outputDateFormat.format(inputDate)
 
                         for (i in 0 until dayPartSize!!) {
-                            val part = day?.dayparts?.get(i)
+                            val part = day.dayparts[i]
 
                             with(part) {
-                                val textBoxStart = this?.starttime?.substring(11, 16)
-                                val textBoxEnd = this?.endtime?.substring(11, 16)
+                                val textBoxStart = this.starttime.substring(11, 16)
+                                val textBoxEnd = this.endtime.substring(11, 16)
                                 val stringText = "$textBoxStart - $textBoxEnd"
 
                                 val textBoxTime = TextView(context)
@@ -112,7 +111,7 @@ class HoursFragment : Fragment() {
                                 }
                                 textBoxTime.clipToOutline = true
 
-                                when(dayOfWeek) {
+                                when (dayOfWeek) {
                                     "Monday" -> binding.mondayContainer.addView(textBoxTime)
                                     "Tuesday" -> binding.tuesdayContainer.addView(textBoxTime)
                                     "Wednesday" -> binding.wednesdayContainer.addView(textBoxTime)

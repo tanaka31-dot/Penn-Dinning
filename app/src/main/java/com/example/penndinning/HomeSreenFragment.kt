@@ -1,11 +1,12 @@
 package com.example.penndinning
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -26,6 +27,7 @@ class HomeSreenFragment : Fragment(), DiningAdapter.ItemClickListener {
         // Inflate the layout for this fragment
         _binding = FragmentHomeSreenBinding.inflate(inflater, container, false)
         // Get a reference to the ActionBar
+        (activity as AppCompatActivity).supportActionBar?.title = "Penn Dinning"
         val animationView = binding.animationView
         animationView.playAnimation()
         return binding.root

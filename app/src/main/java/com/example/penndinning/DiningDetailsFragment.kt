@@ -1,27 +1,20 @@
 package com.example.penndinning
 
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.airbnb.lottie.LottieAnimationView
 import com.example.penndinning.databinding.FragmentDiningDetailsBinding
 import com.squareup.picasso.Picasso
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 
 
 class DiningDetailsFragment : Fragment() {
@@ -61,6 +54,7 @@ class DiningDetailsFragment : Fragment() {
                 binding.hoursButton.visibility = View.VISIBLE
                 binding.menuButton.visibility = View.VISIBLE
                 val dining = viewModel.getDiningsList()?.get(position)
+                (activity as AppCompatActivity).supportActionBar?.title = dining?.name
                 Picasso.get().load(dining?.image).fit()
                     .into(binding.diningImageBig)
                 binding.diningNameDetails.text = dining?.name
@@ -116,7 +110,7 @@ class DiningDetailsFragment : Fragment() {
                 }
                 binding.hoursButton.setOnClickListener {
                     val bundle = bundleOf("id" to position)
-                    view?.findNavController()?.navigate(
+                    view.findNavController().navigate(
                         R.id.action_diningDetailsFragment_to_hoursFragment2, bundle
                     )
                 }
@@ -124,7 +118,7 @@ class DiningDetailsFragment : Fragment() {
         }
     }
 
-    fun mapDiningToURL(id: Int?): String {
+    private fun mapDiningToURL(id: Int?): String {
         when (id) {
             593 -> return "/cafe/1920-commons/"
             636 -> return "/cafe/hill-house/"
