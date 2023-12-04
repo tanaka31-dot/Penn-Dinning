@@ -6,7 +6,7 @@ The Penn Dining Halls App is a dynamic Android application designed to provide P
 
 ## App Walkthrough
 
-![App Walkthrough](https://recordit.co/IZtlN4E41B)
+[App Walkthrough](https://recordit.co/IZtlN4E41B)
 
 ## Features
 
